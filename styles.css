@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*,body,html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#box {
+    position: relative;
+    width: 440px;
+    display: none;
+}
+
+img {
+    width: 100%;
+}
+
+.battery1 {
+    position: absolute;
+    top:26.7px;
+    left:370.1px;
+    font-weight: 800;
+    font-size: 18px;
+    width:25px;
+    height:11px;
+    background: white;
+    border-radius: 2px;
+}
+
+.battery2 {
+    position: absolute;
+    top:27.2px;
+    left:370px;
+    font-weight: 800;
+    font-size: 18px;
+    width:25px;
+    height:10px;
+    background: black;
+    border-radius: 3px;
+}
+
+.time {
+    position: absolute;
+    top:19px;
+    left:49px;
+    font-weight: 900;
+    font-size: 18px;
+    width:70px;
+    background: white;
+    font-family: "Roboto", sans-serif;
+}
+.subject {
+    position: absolute;
+    top:133px;
+    left:30px;
+    font-weight: 500;
+    font-size: 21px;
+    width:330px;
+    background: white;
+    font-family: "Roboto", sans-serif;
+    transform: scale(1.1);
+    line-height: 28px;
+    height: 110px;
+}
+.utc {
+    position: absolute;
+    top:250px;
+    left:17px;
+    font-weight: 500;
+    font-size: 21px;
+    width:60px;
+    background: white;
+    font-family: "Roboto", sans-serif;
+    transform: scale(1.1);
+    line-height: 28px;
+}
+.innerTime1 {
+    font-family: "Roboto", sans-serif;
+}
+
+.btn {
+    position: absolute;
+    top: 30;
+    left: 100px;
+    cursor: pointer;
+    background: crimson;
+    color: white;
+    border: none;
+    padding: 10px;
+}
+
+.body {
+    position: absolute;
+    top:480px;
+    left:30px;
+    font-size: 14px;
+    width:375px;
+    background: white;
+    font-family: "Roboto", sans-serif;
+    line-height: 20px;
+    padding-right:10px;
+    box-sizing: content-box;
+    height:110px
+}
+
+.receivedTime {
+    position: absolute;
+    top:316px;
+    left:136px;
+    font-size: 12px;
+    font-weight: bold;
+    background: white;
+    color:#5f6368;
+    width:100px;
+    padding:0 1px
+}
+
+input {
+    position: absolute;
+    buttom: 95px;
+    left: 380px;
+    width: 50px;
+    outline: none;
+}
+
+label {
+    position: absolute;
+    buttom: 95px;
+    left: 300px;
+    font-size: 14px;
+    font-weight: bold;
+}
