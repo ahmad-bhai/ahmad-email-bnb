@@ -84,7 +84,7 @@ img {
 
 .btn {
     position: absolute;
-    top: 30;
+    top: 0;
     left: 100px;
     cursor: pointer;
     background: crimson;
@@ -121,7 +121,7 @@ img {
 
 input {
     position: absolute;
-    buttom: 95px;
+    top: 50px;
     left: 380px;
     width: 50px;
     outline: none;
@@ -129,7 +129,7 @@ input {
 
 label {
     position: absolute;
-    buttom: 95px;
+    top: 52px;
     left: 300px;
     font-size: 14px;
     font-weight: bold;
