@@ -84,24 +84,47 @@ img {
 
 .btn {
     position: absolute;
-    top: 30px; /* 'top: 30' ko '30px' kar diya taake error na aaye */
+    top: 30px;
     left: 100px;
     cursor: pointer;
-    background: transparent; /* Crimson color hata kar transparent kiya */
-    border: none;
-    padding: 5px;
+    background: #ffffff; /* Modern clean white background */
+    border: 1px solid #e2e8f0; /* Subtle border */
+    border-radius: 12px; /* Smooth rounded corners */
+    padding: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;  /* Icon ke hisab se width */
-    height: 40px; /* Icon ke hisab se height */
+    width: 44px;
+    height: 44px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Soft modern shadow */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth animation transition */
 }
 
-/* Yeh rule zaroori hai taake button ke andar wala icon auto width na le */
+/* Hover Effect - Jab mouse upar aaye */
+.btn:hover {
+    background: #f8fafc; /* Light gray background on hover */
+    transform: translateY(-2px); /* Halka sa upar uthega */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); /* Deep shadow on hover */
+    border-color: #cbd5e1;
+}
+
+/* Active Effect - Jab click karein */
+.btn:active {
+    transform: translateY(1px); /* Click karne par andar dabega */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon styling */
 .btn img {
-    width: 100%;
-    height: 100%;
+    width: 24px; /* Icon ko exact balanced size diya */
+    height: 24px;
     object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* Hover par icon halka sa micro-animate hoga */
+.btn:hover img {
+    transform: scale(1.05);
 }
 
 
