@@ -84,14 +84,26 @@ img {
 
 .btn {
     position: absolute;
-    top: 0;
+    top: 30px; /* 'top: 30' ko '30px' kar diya taake error na aaye */
     left: 100px;
     cursor: pointer;
-    background: crimson;
-    color: white;
+    background: transparent; /* Crimson color hata kar transparent kiya */
     border: none;
-    padding: 10px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;  /* Icon ke hisab se width */
+    height: 40px; /* Icon ke hisab se height */
 }
+
+/* Yeh rule zaroori hai taake button ke andar wala icon auto width na le */
+.btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 
 .body {
     position: absolute;
