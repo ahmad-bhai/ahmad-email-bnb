@@ -113,7 +113,7 @@ img {
 
 /* Hover Effect - Jab mouse upar aaye */
 .btn:hover {
-    background: #ffffff;
+    background: #FCD535;
     border-color: rgba(0, 0, 0, 0.1);
     /* Hover par X-axis ka center barkarar rakhte hue Y-axis par upar uthega */
     transform: translateX(-50%) translateY(-4px); 
