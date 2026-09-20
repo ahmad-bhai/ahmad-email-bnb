@@ -22,26 +22,31 @@ async function sendPhotoMessage(chatId, userName) {
 JOIN NOW & WORK TOWARD YOUR DAILY RECOVERY & TRADING GOALS. 💰🔥
 🚀 JOIN NOW • TRADE SMART • STAY CONSISTENT`;
 
+  const payload = {
+    chat_id: chatId,
+    photo: PHOTO_URL,
+    caption: captionText,
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: "FREE BOT 🤖",
+            url: "https://t.me/+KEYIwc5Y-480ZDY0"
+          }
+        ]
+      ]
+    }
+  };
+
   try {
     const response = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        photo: PHOTO_URL,
-        caption: captionText,
-        reply_markup: {
-          inline_keyboard: [
-            [
-              {
-                text: "FREE BOT 🤖",
-                url: "https://t.me/+KEYIwc5Y-480ZDY0"
-              }
-            ]
-          ]
-        }
-      }),
+      headers: { 
+        "Content-Type": "application/json" 
+      },
+      body: JSON.stringify(payload)
     });
+    
     const data = await response.json();
     console.log("Telegram Response:", data);
   } catch (error) {
@@ -49,35 +54,38 @@ JOIN NOW & WORK TOWARD YOUR DAILY RECOVERY & TRADING GOALS. 💰🔥
   }
 }
 
-// Vercel Webhook Endpoint
-app.post("/api/index", async (req, res) => {
-  const update = req.body;
+// Universal Webhook Handler (Vercel ke routing issues ko permanently fix karne ke liye)
+app.post("*", async (req, res) => {
+  try {
+    const update = req.body;
 
-  // 1. Handle /start command
-  if (update && update.message && update.message.text === "/start") {
-    const chatId = update.message.chat.id;
-    const from = update.message.from;
-    
-    // User Name extraction (First Name + Last Name)
-    const fullName = [from.first_name, from.last_name].filter(Boolean).join(" ") || "Trader";
-    
-    await sendPhotoMessage(chatId, fullName);
-  }
+    if (update) {
+      // 1. Handle /start command
+      if (update.message && update.message.text === "/start") {
+        const chatId = update.message.chat.id;
+        const from = update.message.from || {};
+        const fullName = [from.first_name, from.last_name].filter(Boolean).join(" ") || "Trader";
+        
+        await sendPhotoMessage(chatId, fullName);
+      }
 
-  // 2. Handle Chat Join Request
-  if (update && update.chat_join_request) {
-    const userId = update.chat_join_request.from.id;
-    const from = update.chat_join_request.from;
-    
-    const fullName = [from.first_name, from.last_name].filter(Boolean).join(" ") || "Trader";
-    
-    await sendPhotoMessage(userId, fullName);
+      // 2. Handle Chat Join Request
+      if (update.chat_join_request) {
+        const userId = update.chat_join_request.from.id;
+        const from = update.chat_join_request.from || {};
+        const fullName = [from.first_name, from.last_name].filter(Boolean).join(" ") || "Trader";
+        
+        await sendPhotoMessage(userId, fullName);
+      }
+    }
+  } catch (err) {
+    console.error("Webhook processing error:", err);
   }
 
   res.status(200).send("OK");
 });
 
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   res.send("Bot status: Active");
 });
 
