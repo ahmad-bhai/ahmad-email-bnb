@@ -4,39 +4,24 @@ const app = Express();
 app.use(Express.json());
 
 const BOT_TOKEN = process.env.BOT_TOKEN || "8828282862:AAE6gnK7g5e-IFyXaQ_OoskgcRYzoUJ7BIY";
-const PHOTO_URL = "https://i.ibb.co/1JvTsrpN/d795e3af442a.jpg";
+// Naya Logo URL
+const PHOTO_URL = "https://i.ibb.co/bRJJJcCv/a155df819f25.jpg";
 
-// Telegram Photo with Caption Sending Helper Function
+// Telegram Photo with Caption & Inline Button Helper Function
 async function sendPhotoMessage(chatId, userName) {
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`;
   
-  const captionText = `👋 Hi, ${userName} Welcome To The NO.1 Trading Community🔥
+  const captionText = `WELCOME DEAR ${userName}!
+✨ WELCOME TO OUR AI SIGNALS GROUP! 🤖📈
+⏰ 24/7 AI SIGNALS — SMART & AUTOMATED TRADING SIGNALS 🚀
 
-💸 Join Public Channel Daily Tournament And NON MTG SIGNAL 🚀
-~~~~ 
-Consistent 98% Accuracy 🔥 
-Guaranteed Loss Recovery 💰 
-8+ Years Experience 🚀 
-~~~~
-👇🏻Open Below Link And Start Now 👇🏻
+🔗 [ https://t.me/+KEYIwc5Y-480ZDY0 ] 🔗
+🔗 [ https://t.me/+KEYIwc5Y-480ZDY0 ] 🔗
 
-40$ TO 700$ DAILY TOURNAMENT JOIN NOW CHECK 👇
+💎 DON’T WASTE YOUR TIME & MONEY!
 
-https://t.me/+V5lZvh2Po0dkNzhk
-
-SUPER BINARY TRADER DAILY 3 NON MTG SIGNAL PROVIDE JOIN NOW CHECK 👇
-
-https://t.me/+jMXUHZHKgQY0NjZk
-
-30$ TO 300$ TOURNAMENT JOIN NOW CHECK 👇
-
-https://t.me/+tnWlS8fu2rVjMDJk
-
-Official Regards 🚀
-
-40$ TO 700$ TOURNAMENT ✔️
-SUPER BINARY TRADER ✔️
-30$ TO 300$ TOURNAMENT✔️`;
+JOIN NOW & WORK TOWARD YOUR DAILY RECOVERY & TRADING GOALS. 💰🔥
+🚀 JOIN NOW • TRADE SMART • STAY CONSISTENT`;
 
   try {
     const response = await fetch(url, {
@@ -46,6 +31,16 @@ SUPER BINARY TRADER ✔️
         chat_id: chatId,
         photo: PHOTO_URL,
         caption: captionText,
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "FREE BOT 🤖",
+                url: "https://t.me/+KEYIwc5Y-480ZDY0"
+              }
+            ]
+          ]
+        }
       }),
     });
     const data = await response.json();
@@ -55,36 +50,39 @@ SUPER BINARY TRADER ✔️
   }
 }
 
-// Vercel Webhook Endpoint
-app.post("/api/index", async (req, res) => {
-  const update = req.body;
-
-  // 1. Handle /start command
-  if (update.message && update.message.text === "/start") {
-    const chatId = update.message.chat.id;
-    const from = update.message.from;
-    
-    // User Name extraction (First Name + Last Name)
-    const fullName = [from.first_name, from.last_name].filter(Boolean).join(" ") || "Trader";
-    
-    await sendPhotoMessage(chatId, fullName);
+// Main Endpoint (Root Route handles both Vercel function routes)
+app.all("*", async (req, res) => {
+  if (req.method === "GET") {
+    return res.status(200).send("Bot status: Active");
   }
 
-  // 2. Handle Chat Join Request
-  if (update.chat_join_request) {
-    const userId = update.chat_join_request.from.id;
-    const from = update.chat_join_request.from;
-    
-    const fullName = [from.first_name, from.last_name].filter(Boolean).join(" ") || "Trader";
-    
-    await sendPhotoMessage(userId, fullName);
+  if (req.method === "POST") {
+    const update = req.body;
+
+    // 1. Handle /start command
+    if (update && update.message && update.message.text === "/start") {
+      const chatId = update.message.chat.id;
+      const from = update.message.from;
+      
+      const fullName = [from.first_name, from.last_name].filter(Boolean).join(" ") || "Trader";
+      
+      await sendPhotoMessage(chatId, fullName);
+    }
+
+    // 2. Handle Chat Join Request
+    if (update && update.chat_join_request) {
+      const userId = update.chat_join_request.from.id;
+      const from = update.chat_join_request.from;
+      
+      const fullName = [from.first_name, from.last_name].filter(Boolean).join(" ") || "Trader";
+      
+      await sendPhotoMessage(userId, fullName);
+    }
+
+    return res.status(200).send("OK");
   }
 
-  res.status(200).send("OK");
-});
-
-app.get("/", (req, res) => {
-  res.send("Bot status: Active");
+  return res.status(404).send("Not Found");
 });
 
 module.exports = app;
