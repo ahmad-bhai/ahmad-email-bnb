@@ -4,7 +4,7 @@ const app = Express();
 
 app.use(Express.json());
 
-const BOT_TOKEN = process.env.BOT_TOKEN || "8828282862:AAHRpEJBvXcOXJa8MbnHDskD7UP6YEgjssE";
+const BOT_TOKEN = process.env.BOT_TOKEN || "8829480745:AAGIlll-uE1jcFV6uphvl7boms_Twcj_Bm4";
 const PHOTO_URL = "https://magic-scripts.vercel.app/ubs.png";
 
 // Helper function to send HTTP POST request to Telegram
